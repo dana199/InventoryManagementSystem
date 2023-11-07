@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using InventoryManagementSystem.Domain.InventoryManagement;
 
 namespace InventoryManagementSystem.Domain
@@ -67,6 +68,23 @@ namespace InventoryManagementSystem.Domain
                     Console.WriteLine($"Name :{EditedProduct.Name}, Price: {EditedProduct.Price}, Quantity: {EditedProduct.Quantity}");
                 }
             }
+        }
+        public void DeleteProduct()
+        {
+            Console.WriteLine("Enter the name of the product You want To Delete:");
+            string? productName = Console.ReadLine();
+            Product? product = products.Find(p => p.Name == productName);
+
+                if (product == null)
+                {
+                    Console.WriteLine("Product not found in inventory.");
+                    return;
+                }
+                if (productName == product.Name)
+                {
+                    products.Remove(product);
+                    Console.WriteLine($"Product {productName} deleted");
+                }
         }
     }
 }
