@@ -22,5 +22,20 @@ namespace InventoryManagementSystem.Domain
             products.Add(product);
         }
 
+        public void ViewAllProducts()
+        {
+            Console.WriteLine("The Products:");
+            foreach (var product in products)
+            {
+                if (product != null)
+                {
+                    Console.WriteLine($"[ Name: {product.Name}, Price: {product.Price}, Quantity: {product.Quantity}]");
+                }
+                else
+                {
+                    Console.WriteLine($"There is No product Added");
+                }
+            }
+        }
     }
 }
