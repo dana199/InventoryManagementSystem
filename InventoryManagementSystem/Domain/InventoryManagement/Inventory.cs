@@ -86,5 +86,23 @@ namespace InventoryManagementSystem.Domain
                     Console.WriteLine($"Product {productName} deleted");
                 }
         }
+
+        public void SearchProduct()
+        {
+            Console.Write("Enter the name of the product you want to search for: ");
+            string? productName = Console.ReadLine();
+
+            Product? searchProduct = products.Find(p => p.Name == productName);
+
+            if (searchProduct != null)
+            {
+                Console.WriteLine($"Product Found - Name: {searchProduct.Name}, Price: {searchProduct.Price}, Quantity: {searchProduct.Quantity}");
+            }
+            else
+            {
+                Console.WriteLine("Product not found in inventory.");
+            }
+        }
     }
-}
+    }
+
