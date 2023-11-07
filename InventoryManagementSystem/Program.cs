@@ -5,3 +5,4 @@ Inventory inventory = new Inventory();
 inventory.AddProduct();
 inventory.AddProduct();
 inventory.ViewAllProducts();
+inventory.EditProduct();
