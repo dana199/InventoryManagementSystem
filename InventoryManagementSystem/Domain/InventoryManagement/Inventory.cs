@@ -11,6 +11,8 @@ namespace InventoryManagementSystem.Domain
     public class Inventory
     {
         public List<Product> products = new List<Product>();
+        private int a_ExitCode;
+
         public void AddProduct()
         {
             Console.WriteLine("Enter the name of the product:");
@@ -102,6 +104,11 @@ namespace InventoryManagementSystem.Domain
             {
                 Console.WriteLine("Product not found in inventory.");
             }
+        }
+
+        public void ExitProgram()
+        {
+            System.Environment.Exit(0);
         }
     }
     }
