@@ -11,8 +11,6 @@ namespace InventoryManagementSystem.Domain
     public class Inventory
     {
         public List<Product> products = new List<Product>();
-        private int a_ExitCode;
-
         public void AddProduct()
         {
             Console.WriteLine("Enter the name of the product:");
