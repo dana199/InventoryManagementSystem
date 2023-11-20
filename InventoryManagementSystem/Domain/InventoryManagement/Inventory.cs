@@ -26,15 +26,8 @@ namespace InventoryManagementSystem.Domain
         {
             Console.WriteLine("The Products:");
             foreach (var product in products)
-            {
-                if (product != null)
-                {
-                    Console.WriteLine($"[ Name: {product.Name}, Price: {product.Price}, Quantity: {product.Quantity}]");
-                }
-                else
-                {
-                    Console.WriteLine($"There is No product Added");
-                }
+            {                                  
+                Console.WriteLine(product);
             }
         }
         public void EditProduct()
@@ -42,14 +35,14 @@ namespace InventoryManagementSystem.Domain
             Console.WriteLine("Enter the name of the product You want To Edit:");
             string? name = Console.ReadLine();
             Product? EditedProduct = products.Find(x => x.Name == name);
+            if (EditedProduct == null)
+            {
+                Console.WriteLine("Product not found in inventory.");
+                return;
+            }
             foreach (var product in products)
             {
-                if (EditedProduct == null)
-                {
-                    Console.WriteLine("Product not found in inventory.");
-                    return;
-                }
-                else if (EditedProduct.Name == product.Name)
+            if (EditedProduct.Name == product.Name)
                 {
                     Console.WriteLine("Enter the new Product Name:");
                     string? newName = Console.ReadLine();
@@ -102,11 +95,6 @@ namespace InventoryManagementSystem.Domain
             {
                 Console.WriteLine("Product not found in inventory.");
             }
-        }
-
-        public void ExitProgram()
-        {
-            System.Environment.Exit(0);
         }
     }
     }

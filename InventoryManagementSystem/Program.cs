@@ -5,14 +5,17 @@ Inventory inventory = new Inventory();
 Console.WriteLine("Welcome to the Product Inventory Management System");
 while (true)
 {
-    Console.WriteLine("1. Add a product");
-    Console.WriteLine("2. View All Products");
-    Console.WriteLine("3. Edit a product");
-    Console.WriteLine("4. Delete a product");
-    Console.WriteLine("5. Search For a product");
-    Console.WriteLine("6. Exit the application");
-    Console.Write("Please enter your choice: ");
-    string? choice = Console.ReadLine();
+    var options =
+        @"
+         1. Add a product
+         2. View All Products
+         3. Edit a product 
+         4. Delete a product
+         5. Search For a product
+         6. Exit the application
+         7. Please enter your choice:";
+   Console.WriteLine(options);
+   string? choice = Console.ReadLine();
 
     switch (choice)
     {
@@ -32,7 +35,7 @@ while (true)
             inventory.SearchProduct();
             break;
         case "6":
-            inventory.ExitProgram();
+            System.Environment.Exit(0);
             break;
         default:
             Console.WriteLine("Invalid choice. Please try again.");

@@ -18,6 +18,9 @@ namespace InventoryManagementSystem.Domain.InventoryManagement
             Price = price;
             Quantity = quantity;
         }
+        public override string ToString() {
+            return $"[ Name: {Name}, Price: {Price}, Quantity: {Quantity}]";
+        }
 
     }
 }
