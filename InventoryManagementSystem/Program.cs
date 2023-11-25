@@ -1,7 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using InventoryManagementSystem.Domain;
+using InventoryManagementSystem.Domain.Reader;
+using System.Reflection;
+using System.Reflection.Emit;
 
-Inventory inventory = new Inventory();
+IReader cr = new ConsoleReader();
+Inventory inventory = new Inventory(cr);
+
 Console.WriteLine("Welcome to the Product Inventory Management System");
 while (true)
 {
@@ -13,7 +18,7 @@ while (true)
          4. Delete a product
          5. Search For a product
          6. Exit the application
-         7. Please enter your choice:";
+        Please enter your choice:";
    Console.WriteLine(options);
    string? choice = Console.ReadLine();
 

@@ -4,22 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using InventoryManagementSystem.Domain.InventoryManagement;
+using InventoryManagementSystem.Domain.Reader;
 
 namespace InventoryManagementSystem.Domain
 {
     public class Inventory
     {
         public List<Product> products = new List<Product>();
+        private readonly IReader reader;
+
+        public Inventory(IReader reader)
+        {
+           this.reader = reader;
+        }
         public void AddProduct()
         {
-            Console.WriteLine("Enter the name of the product:");
-            string? name = Console.ReadLine();
-            Console.WriteLine("Enter the price of the product:");
-            int price = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter the quantity of the product");
-            int quantity = Convert.ToInt32(Console.ReadLine());
-            Product product = new Product(name, price, quantity);
+            Product product = reader.ReadProduct();
             products.Add(product);
         }
         public void ViewAllProducts()
@@ -32,8 +32,7 @@ namespace InventoryManagementSystem.Domain
         }
         public void EditProduct()
         {
-            Console.WriteLine("Enter the name of the product You want To Edit:");
-            string? name = Console.ReadLine();
+            string? name = reader.ReadString("Enter the name of the product You want To Edit:");
             Product? EditedProduct = products.Find(x => x.Name == name);
             if (EditedProduct == null)
             {
@@ -44,16 +43,13 @@ namespace InventoryManagementSystem.Domain
             {
             if (EditedProduct.Name == product.Name)
                 {
-                    Console.WriteLine("Enter the new Product Name:");
-                    string? newName = Console.ReadLine();
+                    string? newName = reader.ReadString("Enter the new Product Name:");
                     EditedProduct.Name = newName;
 
-                    Console.WriteLine("Enter the new Product Price:");
-                    int newprice = Convert.ToInt32(Console.ReadLine());
+                    int newprice = reader.ReadInt("Enter the new Product Price:");
                     EditedProduct.Price = newprice;
 
-                    Console.WriteLine("Enter the quantity of the product");
-                    int newQuantity = Convert.ToInt32(Console.ReadLine());
+                    int newQuantity = reader.ReadInt("Enter the quantity of the product");
                     EditedProduct.Quantity = newQuantity;
 
                     Console.WriteLine($"Product updated successfully.");
@@ -64,8 +60,7 @@ namespace InventoryManagementSystem.Domain
         }
         public void DeleteProduct()
         {
-            Console.WriteLine("Enter the name of the product You want To Delete:");
-            string? productName = Console.ReadLine();
+            string? productName = reader.ReadString("Enter the name of the product You want To Delete:");
             Product? product = products.Find(p => p.Name == productName);
 
                 if (product == null)
@@ -82,8 +77,7 @@ namespace InventoryManagementSystem.Domain
 
         public void SearchProduct()
         {
-            Console.Write("Enter the name of the product you want to search for: ");
-            string? productName = Console.ReadLine();
+            string? productName = reader.ReadString("Enter the name of the product you want to search for: ");
 
             Product? searchProduct = products.Find(p => p.Name == productName);
 
