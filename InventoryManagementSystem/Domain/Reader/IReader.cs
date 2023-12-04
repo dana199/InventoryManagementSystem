@@ -11,5 +11,6 @@ namespace InventoryManagementSystem.Domain.Reader
         string ReadString(string message);
         int ReadInt(string message);
         Product ReadProduct();
+        void PrintAllProducts(List<Product> products);
     }
 }

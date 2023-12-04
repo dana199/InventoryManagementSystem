@@ -8,5 +8,6 @@ namespace InventoryManagementSystem.Domain.Reader
 {
     internal class FileReader
     {
+
     }
 }

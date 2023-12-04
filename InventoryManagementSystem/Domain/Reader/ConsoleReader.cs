@@ -29,5 +29,14 @@ namespace InventoryManagementSystem.Domain.Reader
             int quantity = ReadInt("Enter the quantity of the product");
             return new Product(name, price, quantity);
         }
+
+        public void PrintAllProducts(List<Product> products)
+        {
+            Console.WriteLine("The Products:");
+            foreach (var product in products)
+            {
+                Console.WriteLine(product);
+            }
+        }
     }
 }

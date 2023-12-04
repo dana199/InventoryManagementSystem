@@ -32,31 +32,23 @@ namespace InventoryManagementSystem.Domain
         }
         public void EditProduct()
         {
-            string? name = reader.ReadString("Enter the name of the product You want To Edit:");
-            Product? EditedProduct = products.Find(x => x.Name == name);
-            if (EditedProduct == null)
+            string? NameOfProductToEdit = reader.ReadString("Enter the name of the product You want To Edit:");
+            Product? ProductToFind = products.Find(x => x.Name == NameOfProductToEdit);
+
+            if (ProductToFind == null)
             {
                 Console.WriteLine("Product not found in inventory.");
                 return;
             }
-            foreach (var product in products)
-            {
-            if (EditedProduct.Name == product.Name)
-                {
-                    string? newName = reader.ReadString("Enter the new Product Name:");
-                    EditedProduct.Name = newName;
-
-                    int newprice = reader.ReadInt("Enter the new Product Price:");
-                    EditedProduct.Price = newprice;
-
-                    int newQuantity = reader.ReadInt("Enter the quantity of the product");
-                    EditedProduct.Quantity = newQuantity;
+            Product ProductToEdit = reader.ReadProduct();
+            ProductToFind.Name = ProductToEdit.Name;
+            ProductToFind.Price = ProductToEdit.Price;
+            ProductToFind.Quantity = ProductToEdit.Quantity;
 
                     Console.WriteLine($"Product updated successfully.");
                     Console.WriteLine($"The updated product:");
-                    Console.WriteLine($"Name :{EditedProduct.Name}, Price: {EditedProduct.Price}, Quantity: {EditedProduct.Quantity}");
-                }
-            }
+                    Console.WriteLine($"Name :{ProductToFind.Name}, Price: {ProductToFind.Price}, Quantity: {ProductToFind.Quantity}");
+
         }
         public void DeleteProduct()
         {
@@ -75,20 +67,14 @@ namespace InventoryManagementSystem.Domain
                 }
         }
 
-        public void SearchProduct()
+        public Product SearchProduct()
         {
             string? productName = reader.ReadString("Enter the name of the product you want to search for: ");
 
             Product? searchProduct = products.Find(p => p.Name == productName);
 
-            if (searchProduct != null)
-            {
-                Console.WriteLine($"Product Found - Name: {searchProduct.Name}, Price: {searchProduct.Price}, Quantity: {searchProduct.Quantity}");
-            }
-            else
-            {
-                Console.WriteLine("Product not found in inventory.");
-            }
+            return searchProduct;
+
         }
     }
     }

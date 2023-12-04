@@ -8,10 +8,8 @@ IReader cr = new ConsoleReader();
 Inventory inventory = new Inventory(cr);
 
 Console.WriteLine("Welcome to the Product Inventory Management System");
-while (true)
-{
-    var options =
-        @"
+var options =
+    @"
          1. Add a product
          2. View All Products
          3. Edit a product 
@@ -19,6 +17,8 @@ while (true)
          5. Search For a product
          6. Exit the application
         Please enter your choice:";
+while (true)
+{
    Console.WriteLine(options);
    string? choice = Console.ReadLine();
 
@@ -37,7 +37,15 @@ while (true)
             inventory.DeleteProduct();
             break;
         case "5":
-            inventory.SearchProduct();
+            Product ? ProductToSearch = inventory.SearchProduct();
+            if (ProductToSearch != null)
+            {
+                Console.WriteLine($"Product Found - Name: {ProductToSearch.Name}, Price: {ProductToSearch.Price}, Quantity: {ProductToSearch.Quantity}");
+            }
+            else
+            {
+                Console.WriteLine("Product not found in inventory.");
+            }
             break;
         case "6":
             System.Environment.Exit(0);
