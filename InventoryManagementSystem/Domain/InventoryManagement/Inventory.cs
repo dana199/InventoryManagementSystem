@@ -24,11 +24,7 @@ namespace InventoryManagementSystem.Domain
         }
         public void ViewAllProducts()
         {
-            Console.WriteLine("The Products:");
-            foreach (var product in products)
-            {                                  
-                Console.WriteLine(product);
-            }
+            reader.PrintAllProducts(products);
         }
         public void EditProduct()
         {
