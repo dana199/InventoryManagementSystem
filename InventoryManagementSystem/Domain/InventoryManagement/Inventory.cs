@@ -15,21 +15,19 @@ namespace InventoryManagementSystem.Domain
 
         public Inventory(IReader reader)
         {
-           this.reader = reader;
+            this.reader = reader;
         }
-        public void AddProduct()
+        public void AddProduct(Product ProductToAdd)
         {
-            Product product = reader.ReadProduct();
-            products.Add(product);
+            products.Add(ProductToAdd);
         }
-        public void ViewAllProducts()
+        public List<Product> GetAllProducts()
         {
-            reader.PrintAllProducts(products);
+            return products;
         }
-        public void EditProduct()
+        public void EditProduct(string ProductName)
         {
-            string? NameOfProductToEdit = reader.ReadString("Enter the name of the product You want To Edit:");
-            Product? ProductToFind = products.Find(x => x.Name == NameOfProductToEdit);
+            Product? ProductToFind = products.Find(x => x.Name == ProductName);
 
             if (ProductToFind == null)
             {
@@ -41,37 +39,33 @@ namespace InventoryManagementSystem.Domain
             ProductToFind.Price = ProductToEdit.Price;
             ProductToFind.Quantity = ProductToEdit.Quantity;
 
-                    Console.WriteLine($"Product updated successfully.");
-                    Console.WriteLine($"The updated product:");
-                    Console.WriteLine($"Name :{ProductToFind.Name}, Price: {ProductToFind.Price}, Quantity: {ProductToFind.Quantity}");
+            Console.WriteLine($"Product updated successfully.");
+            Console.WriteLine($"The updated product:");
+            Console.WriteLine($"Name :{ProductToFind.Name}, Price: {ProductToFind.Price}, Quantity: {ProductToFind.Quantity}");
 
         }
-        public void DeleteProduct()
-        {
-            string? productName = reader.ReadString("Enter the name of the product You want To Delete:");
-            Product? product = products.Find(p => p.Name == productName);
+        public void DeleteProduct(string ProductName)
+        {         
+            Product? product = products.Find(p => p.Name == ProductName);
 
-                if (product == null)
-                {
-                    Console.WriteLine("Product not found in inventory.");
-                    return;
-                }
-                if (productName == product.Name)
-                {
-                    products.Remove(product);
-                    Console.WriteLine($"Product {productName} deleted");
-                }
+            if (product == null)
+            {
+                Console.WriteLine("Product not found in inventory.");
+                return;
+            }
+            if (ProductName == product.Name)
+            {
+                products.Remove(product);
+                Console.WriteLine($"Product {ProductName} deleted");
+            }
         }
 
-        public Product SearchProduct()
+        public Product SearchProduct(string productName)
         {
-            string? productName = reader.ReadString("Enter the name of the product you want to search for: ");
-
             Product? searchProduct = products.Find(p => p.Name == productName);
-
             return searchProduct;
 
         }
     }
-    }
+}
 
