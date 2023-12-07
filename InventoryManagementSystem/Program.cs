@@ -3,6 +3,7 @@ using InventoryManagementSystem.Domain;
 using InventoryManagementSystem.Domain.Reader;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Reflection.PortableExecutable;
 
 IReader cr = new ConsoleReader();
 Inventory inventory = new Inventory(cr);
@@ -19,25 +20,29 @@ var options =
         Please enter your choice:";
 while (true)
 {
-   Console.WriteLine(options);
-   string? choice = Console.ReadLine();
-
+    Console.WriteLine(options);
+    string? choice = Console.ReadLine();
     switch (choice)
     {
         case "1":
-            inventory.AddProduct();
+            Product productToAdd = cr.ReadProduct();
+            inventory.AddProduct(productToAdd);
             break;
         case "2":
-            inventory.ViewAllProducts();
+            var Allproducts = inventory.GetAllProducts();
+            cr.PrintAllProducts(Allproducts);
             break;
         case "3":
-            inventory.EditProduct();
+            string? ProductNameToEdit = cr.ReadString("Enter the name of the product You want To Edit:");
+            inventory.EditProduct(ProductNameToEdit);
             break;
         case "4":
-            inventory.DeleteProduct();
+            string? ProductNameToDelete = cr.ReadString("Enter the name of the product You want To Delete:");
+            inventory.DeleteProduct(ProductNameToDelete);
             break;
         case "5":
-            Product ? ProductToSearch = inventory.SearchProduct();
+            string? ProductNameToSearch = cr.ReadString("Enter the name of the product you want to search for: ");
+            Product? ProductToSearch = inventory.SearchProduct(ProductNameToSearch);
             if (ProductToSearch != null)
             {
                 Console.WriteLine($"Product Found - Name: {ProductToSearch.Name}, Price: {ProductToSearch.Price}, Quantity: {ProductToSearch.Quantity}");
